@@ -29,8 +29,3 @@ jobs:
     - name: Rodar pipeline ETL
       run: |
         poetry run python src/etl.py  # Executa o script 'etl.py' que orquestra a execução do 'pipeline.py'
-
-    - name: Deploy para produção
-      run: |
-        # Comando para fazer o deploy (exemplo com AWS, DigitalOcean, etc)
-        scp -r ./path/to/project username@production_server:/path/to/deploy
