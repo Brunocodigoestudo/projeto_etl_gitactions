@@ -1,0 +1,36 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main  # O workflow será ativado sempre que houver um push na branch 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Define o sistema operacional do runner
+
+    steps:
+    - name: Checar código
+      uses: actions/checkout@v2  # Checa o código do repositório
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11.5'  # Define a versão do Python para 3.11.5
+
+    - name: Instalar Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -  # Instala o Poetry
+
+    - name: Instalar dependências com Poetry
+      run: |
+        poetry install  # Instala as dependências do projeto usando o Poetry
+
+    - name: Rodar pipeline ETL
+      run: |
+        poetry run python src/etl.py  # Executa o script 'etl.py' que orquestra a execução do 'pipeline.py'
+
+    - name: Deploy para produção
+      run: |
+        # Comando para fazer o deploy (exemplo com AWS, DigitalOcean, etc)
+        scp -r ./path/to/project username@production_server:/path/to/deploy
