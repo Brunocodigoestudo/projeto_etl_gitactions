@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "aula-08"
+name = "projeto_etl_gitactions"
 version = "0.1.0"
 description = ""
 authors = ["Bruno <bruno.eng.proj@hotmail.com>"]
